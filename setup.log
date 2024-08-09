@@ -1,0 +1,51 @@
+Configuring K8s Cluster...
+error: no context exists with the name: "kubernetes-admin@kubernetes"
+Creating PV and PVC...
+pod/task-pv-pod created
+persistentvolume/mypv created
+persistentvolumeclaim/mypvc created
+Copying prerequisites to NFS server...
+total 4
+drwxrwxrwx 6 root root 4096 Jun 21 11:40 fabric-ca
+Deploying CA Fabric Server...
+service/ca-orderer created
+deployment.apps/ca-orderer created
+service/ca-org1 created
+deployment.apps/ca-org1 created
+service/ca-org2 created
+deployment.apps/ca-org2 created
+service/ca-org3 created
+deployment.apps/ca-org3 created
+Generating Certificates...
+job.batch/create-certs created
+Creating Artifacts...
+job.batch/artifacts created
+Starting up Orderers...
+service/orderer created
+deployment.apps/orderer created
+service/orderer2 created
+deployment.apps/orderer2 created
+service/orderer3 created
+deployment.apps/orderer3 created
+service/orderer4 created
+deployment.apps/orderer4 created
+service/orderer5 created
+deployment.apps/orderer5 created
+NAME                          READY   STATUS             RESTARTS     AGE
+artifacts-b7kg6               0/1     Error              0            56s
+artifacts-h5cd2               0/1     Error              0            2m
+artifacts-hz7t4               0/1     Error              0            98s
+artifacts-tjzh5               0/1     Error              0            2m13s
+ca-orderer-8576f4587c-2hw2f   1/1     Running            0            2m34s
+ca-org1-7f7d5bc58b-7w6z7      1/1     Running            0            2m34s
+ca-org2-9567c99bd-v885x       1/1     Running            0            2m33s
+ca-org3-b6984cbff-mkz9v       1/1     Running            0            2m33s
+create-certs-jr9cq            1/1     Running            0            2m23s
+orderer-64cdcd5548-5snb5      0/1     CrashLoopBackOff   1 (6s ago)   11s
+orderer2-8c89dd474-r7g55      0/1     CrashLoopBackOff   1 (4s ago)   11s
+orderer3-6947989b5-dwp69      0/1     Error              1 (7s ago)   11s
+orderer4-cbffd98f6-jr4wj      0/1     Error              1 (6s ago)   11s
+orderer5-75c94cb9bc-hw8g6     0/1     CrashLoopBackOff   1 (4s ago)   10s
+task-pv-pod                   1/1     Running            0            2m47s
+Configuring Prerequisites...
+configmap/builders-config created

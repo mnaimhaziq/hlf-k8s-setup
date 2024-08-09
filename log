@@ -1,0 +1,1400 @@
+Configuring K8s Cluster...
+Switched to context "kubernetes-admin@kubernetes".
+Creating PV and PVC...
+pod/task-pv-pod created
+persistentvolume/mypv created
+persistentvolumeclaim/mypvc created
+Waiting for pv in namespace hlf to be ready...
+pv is ready.
+Waiting for pvc in namespace hlf to be ready...
+pvc is ready.
+Copying prerequisites to NFS server...
+total 4
+drwxrwxrwx 6 root root 4096 Jul  4 15:25 fabric-ca
+Deploying CA Fabric Server...
+service/ca-orderer created
+deployment.apps/ca-orderer created
+service/ca-org1 created
+deployment.apps/ca-org1 created
+service/ca-org2 created
+deployment.apps/ca-org2 created
+service/ca-org3 created
+deployment.apps/ca-org3 created
+Waiting for pv in namespace hlf to be ready...
+pv is ready.
+Generating Certificates...
+job.batch/create-certs created
+Creating Artifacts...
+job.batch/artifacts created
+Starting up Orderers...
+service/orderer created
+deployment.apps/orderer created
+service/orderer2 created
+deployment.apps/orderer2 created
+service/orderer3 created
+deployment.apps/orderer3 created
+service/orderer4 created
+deployment.apps/orderer4 created
+service/orderer5 created
+deployment.apps/orderer5 created
+NAME                          READY   STATUS      RESTARTS   AGE
+artifacts-5z85q               0/1     Error       0          2m13s
+artifacts-h9sbr               0/1     Error       0          2m2s
+artifacts-ndk8f               0/1     Completed   0          102s
+ca-orderer-756995db47-w7d9j   1/1     Running     0          2m25s
+ca-org1-ffdbd4899-4zhgc       1/1     Running     0          2m24s
+ca-org2-58bcccdf75-ll895      1/1     Running     0          2m24s
+ca-org3-54b597ffd6-hx6s6      1/1     Running     0          2m24s
+create-certs-lj5w5            0/1     Completed   0          2m23s
+orderer-74d9d7969-ncvrs       1/1     Running     0          11s
+orderer2-6f9c5cf595-lhrqd     1/1     Running     0          11s
+orderer3-5b449487d-89t8x      1/1     Running     0          11s
+orderer4-54549c9bd5-qdcr8     1/1     Running     0          11s
+orderer5-7f794c5444-pdf56     1/1     Running     0          10s
+task-pv-pod                   1/1     Running     0          5m35s
+Configuring Prerequisites...
+configmap/builders-config created
+Starting up Peers...
+Warning: spec.template.spec.containers[0].env[13]: hides previous definition of "FABRIC_LOGGING_SPEC"
+deployment.apps/cli-peer0-org1 created
+service/peer0-org1 created
+service/peer0-org1-metrics created
+deployment.apps/peer0-org1 created
+Warning: spec.template.spec.containers[0].env[13]: hides previous definition of "FABRIC_LOGGING_SPEC"
+deployment.apps/cli-peer0-org2 created
+service/peer0-org2 created
+service/peer0-org2-metrics created
+deployment.apps/peer0-org2 created
+Warning: spec.template.spec.containers[0].env[13]: hides previous definition of "FABRIC_LOGGING_SPEC"
+deployment.apps/cli-peer0-org3 created
+service/peer0-org3 created
+service/peer0-org3-metrics created
+deployment.apps/peer0-org3 created
+Get Pods Name based on label selectors...
+CLI PEER0_ORG1 === cli-peer0-org1-766cdb4d64-tw557
+CLI PEER0_ORG2 === cli-peer0-org2-67c9b67d7c-kk4zr
+CLI PEER0_ORG3 === cli-peer0-org3-595fd7d7c8-tb89m
+Creating App Channel...
+[36m2024-07-04 07:28:38.054 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:38.055 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:38.242 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:38.257 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:38.257 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts
+[36m2024-07-04 07:28:38.259 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:38.261 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts
+[36m2024-07-04 07:28:38.263 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts/ca-org1-7054-ca-org1.pem
+[36m2024-07-04 07:28:38.265 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/admincerts
+[36m2024-07-04 07:28:38.265 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:38.266 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:38.266 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:38.266 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:38.266 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls
+[36m2024-07-04 07:28:38.267 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:38.269 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:38.270 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:38.270 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:38.270 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:38.271 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org1MSP
+[36m2024-07-04 07:28:38.271 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGTCCAb+gAwIBAgIUMmyZHsDUmq4kB9aPK9stbHI0u/IwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzExEDAOBgNVBAsTB2NhLW9yZzExEDAOBgNVBAMTB2Nh
+LW9yZzEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR2Yb7lOKVZgyfDkZ4m1tId
+nGjpfaKpQrfRWII8FjlZZh+ybypgjWD0dt6gc0QgIHZz3Xi+a6XGRCq3A3XWnFdE
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/jOhTSVmAzBRToBq9z22VNZBQYcwCgYIKoZIzj0EAwIDSAAwRQIhAMXlHsrh
+YgPPfSiqhwHt8fxW2Zzh1Gvz7FthkHwSMY6VAiAR+wkq8hSKfElqsgjBPoDQz3K7
+FJAVT4eMFMfcwg5y5w==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:38.271 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:38.272 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6] at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6_sk]...
+[36m2024-07-04 07:28:38.274 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:38.274 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:38.275 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:38.280 UTC [grpc] WarningDepth -> DEBU 01b[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 021[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.280 UTC [grpc] InfoDepth -> DEBU 022[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:38.281 UTC [grpc] InfoDepth -> DEBU 023[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002ec9e0, {CONNECTING <nil>}
+[36m2024-07-04 07:28:38.281 UTC [grpc] InfoDepth -> DEBU 024[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.286 UTC [comm.tls] ClientHandshake -> DEBU 025[0m Client TLS handshake completed in 2.192802ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:38.287 UTC [grpc] InfoDepth -> DEBU 026[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:38.287 UTC [grpc] InfoDepth -> DEBU 027[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002ec9e0, {READY <nil>}
+[36m2024-07-04 07:28:38.287 UTC [grpc] InfoDepth -> DEBU 028[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:38.287 UTC [channelCmd] InitCmdFactory -> INFO 029[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:38.289 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: plaintext: 0AE5070A074F7267314D535012D9072D...53616D706C65436F6E736F727469756D 
+[36m2024-07-04 07:28:38.289 UTC [msp.identity] Sign -> DEBU 02b[0m Sign: digest: EE7629D5ED2520C1D20F450263531B30809F5D5F1C73303DFF0C89EAEB81EF65 
+[36m2024-07-04 07:28:38.289 UTC [msp.identity] Sign -> DEBU 02c[0m Sign: plaintext: 0A9C080A1508021A0608A69E99B40622...0D1F8DCD5640BC1B7CE3F9FAA07ED7BD 
+[36m2024-07-04 07:28:38.289 UTC [msp.identity] Sign -> DEBU 02d[0m Sign: digest: 6A8265B3FD9AEC137BAB98A275286C87B88FC261CB1355F95A490CC9AFC078CC 
+[36m2024-07-04 07:28:38.290 UTC [grpc] WarningDepth -> DEBU 02e[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:38.290 UTC [grpc] InfoDepth -> DEBU 02f[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:38.290 UTC [grpc] InfoDepth -> DEBU 030[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:38.290 UTC [grpc] InfoDepth -> DEBU 031[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:38.290 UTC [grpc] InfoDepth -> DEBU 032[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:38.341 UTC [grpc] InfoDepth -> DEBU 033[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:38.341 UTC [grpc] InfoDepth -> DEBU 034[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.341 UTC [grpc] InfoDepth -> DEBU 035[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:38.342 UTC [grpc] InfoDepth -> DEBU 036[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0001eec50, {CONNECTING <nil>}
+[36m2024-07-04 07:28:38.342 UTC [grpc] InfoDepth -> DEBU 037[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.349 UTC [comm.tls] ClientHandshake -> DEBU 038[0m Client TLS handshake completed in 3.03847ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:38.350 UTC [grpc] InfoDepth -> DEBU 039[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:38.350 UTC [grpc] InfoDepth -> DEBU 03a[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0001eec50, {READY <nil>}
+[36m2024-07-04 07:28:38.350 UTC [grpc] InfoDepth -> DEBU 03b[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:28:38.414 UTC [msp.identity] Sign -> DEBU 03c[0m Sign: plaintext: 0A9C080A1508051A0608A69E99B40622...EF32DE93A18E12080A021A0012021A00 
+[36m2024-07-04 07:28:38.414 UTC [msp.identity] Sign -> DEBU 03d[0m Sign: digest: 1D2B82E1A55BEC14FF50C64775ECBF0A75D1F8EC57BACF673C682229A632037B 
+[34m2024-07-04 07:28:38.419 UTC [cli.common] readBlock -> INFO 03e[0m Expect block, but got status: &{NOT_FOUND}
+[36m2024-07-04 07:28:38.420 UTC [msp] GetDefaultSigningIdentity -> DEBU 03f[0m Obtaining default signing identity
+[36m2024-07-04 07:28:38.422 UTC [grpc] WarningDepth -> DEBU 040[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 041[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 042[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 043[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 044[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 045[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 046[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.422 UTC [grpc] InfoDepth -> DEBU 047[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:38.424 UTC [grpc] InfoDepth -> DEBU 048[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00023e830, {CONNECTING <nil>}
+[36m2024-07-04 07:28:38.424 UTC [grpc] InfoDepth -> DEBU 049[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.430 UTC [comm.tls] ClientHandshake -> DEBU 04a[0m Client TLS handshake completed in 3.38256ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:38.431 UTC [grpc] InfoDepth -> DEBU 04b[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:38.432 UTC [grpc] InfoDepth -> DEBU 04c[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00023e830, {READY <nil>}
+[36m2024-07-04 07:28:38.432 UTC [grpc] InfoDepth -> DEBU 04d[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:38.432 UTC [channelCmd] InitCmdFactory -> INFO 04e[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:38.633 UTC [msp.identity] Sign -> DEBU 04f[0m Sign: plaintext: 0A9C080A1508051A0608A69E99B40622...523AF9A9402812080A021A0012021A00 
+[36m2024-07-04 07:28:38.633 UTC [msp.identity] Sign -> DEBU 050[0m Sign: digest: 5D4855AFCD55D35A63851D962B99248F299AD027A89D730AF331E489C66AAF5C 
+[34m2024-07-04 07:28:38.637 UTC [cli.common] readBlock -> INFO 051[0m Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[36m2024-07-04 07:28:38.637 UTC [msp] GetDefaultSigningIdentity -> DEBU 052[0m Obtaining default signing identity
+[36m2024-07-04 07:28:38.639 UTC [grpc] WarningDepth -> DEBU 053[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:38.639 UTC [grpc] InfoDepth -> DEBU 054[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:38.639 UTC [grpc] InfoDepth -> DEBU 055[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:38.639 UTC [grpc] InfoDepth -> DEBU 056[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:38.640 UTC [grpc] InfoDepth -> DEBU 057[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:38.640 UTC [grpc] InfoDepth -> DEBU 058[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:38.641 UTC [grpc] InfoDepth -> DEBU 059[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.641 UTC [grpc] InfoDepth -> DEBU 05a[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002a1530, {CONNECTING <nil>}
+[36m2024-07-04 07:28:38.642 UTC [grpc] InfoDepth -> DEBU 05b[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.642 UTC [grpc] InfoDepth -> DEBU 05c[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:38.647 UTC [comm.tls] ClientHandshake -> DEBU 05d[0m Client TLS handshake completed in 2.569397ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:38.648 UTC [grpc] InfoDepth -> DEBU 05e[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:38.648 UTC [grpc] InfoDepth -> DEBU 05f[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002a1530, {READY <nil>}
+[36m2024-07-04 07:28:38.649 UTC [grpc] InfoDepth -> DEBU 060[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:38.649 UTC [channelCmd] InitCmdFactory -> INFO 061[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:38.850 UTC [msp.identity] Sign -> DEBU 062[0m Sign: plaintext: 0A9C080A1508051A0608A69E99B40622...14E36A11EF2D12080A021A0012021A00 
+[36m2024-07-04 07:28:38.850 UTC [msp.identity] Sign -> DEBU 063[0m Sign: digest: 05496B964C5D03AF8B9E0CEB08824CF94228B3050A3FD4356F55443B41A8BE9F 
+[34m2024-07-04 07:28:38.853 UTC [cli.common] readBlock -> INFO 064[0m Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[36m2024-07-04 07:28:38.853 UTC [msp] GetDefaultSigningIdentity -> DEBU 065[0m Obtaining default signing identity
+[36m2024-07-04 07:28:38.854 UTC [grpc] WarningDepth -> DEBU 066[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:38.854 UTC [grpc] InfoDepth -> DEBU 067[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:38.854 UTC [grpc] InfoDepth -> DEBU 068[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:38.854 UTC [grpc] InfoDepth -> DEBU 069[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:38.854 UTC [grpc] InfoDepth -> DEBU 06a[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:38.854 UTC [grpc] InfoDepth -> DEBU 06b[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:38.855 UTC [grpc] InfoDepth -> DEBU 06c[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.855 UTC [grpc] InfoDepth -> DEBU 06d[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002d4340, {CONNECTING <nil>}
+[36m2024-07-04 07:28:38.855 UTC [grpc] InfoDepth -> DEBU 06e[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:38.855 UTC [grpc] InfoDepth -> DEBU 06f[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:38.860 UTC [comm.tls] ClientHandshake -> DEBU 070[0m Client TLS handshake completed in 2.706401ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:38.862 UTC [grpc] InfoDepth -> DEBU 071[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:38.863 UTC [grpc] InfoDepth -> DEBU 072[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002d4340, {READY <nil>}
+[36m2024-07-04 07:28:38.864 UTC [grpc] InfoDepth -> DEBU 073[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:38.865 UTC [channelCmd] InitCmdFactory -> INFO 074[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:39.065 UTC [msp.identity] Sign -> DEBU 075[0m Sign: plaintext: 0A9C080A1508051A0608A79E99B40622...FE8FC655B48212080A021A0012021A00 
+[36m2024-07-04 07:28:39.066 UTC [msp.identity] Sign -> DEBU 076[0m Sign: digest: 03938FB8384F523FCC9CF296577F5C926E9F7D43AFA084417C639E56EFCB3326 
+[34m2024-07-04 07:28:39.067 UTC [cli.common] readBlock -> INFO 077[0m Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[36m2024-07-04 07:28:39.068 UTC [msp] GetDefaultSigningIdentity -> DEBU 078[0m Obtaining default signing identity
+[36m2024-07-04 07:28:39.069 UTC [grpc] WarningDepth -> DEBU 079[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:39.069 UTC [grpc] InfoDepth -> DEBU 07a[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:39.069 UTC [grpc] InfoDepth -> DEBU 07b[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 07c[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 07d[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 07e[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 07f[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 080[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000364e00, {CONNECTING <nil>}
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 081[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:39.070 UTC [grpc] InfoDepth -> DEBU 082[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:39.075 UTC [comm.tls] ClientHandshake -> DEBU 083[0m Client TLS handshake completed in 2.478378ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:39.076 UTC [grpc] InfoDepth -> DEBU 084[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:39.076 UTC [grpc] InfoDepth -> DEBU 085[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000364e00, {READY <nil>}
+[36m2024-07-04 07:28:39.076 UTC [grpc] InfoDepth -> DEBU 086[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:39.077 UTC [channelCmd] InitCmdFactory -> INFO 087[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:39.278 UTC [msp.identity] Sign -> DEBU 088[0m Sign: plaintext: 0A9C080A1508051A0608A79E99B40622...4A88EF0EFFBD12080A021A0012021A00 
+[36m2024-07-04 07:28:39.278 UTC [msp.identity] Sign -> DEBU 089[0m Sign: digest: 816E4776910D78760EE85847E89743BC1BECBF6C97AECD66187B134D2074635D 
+[34m2024-07-04 07:28:39.279 UTC [cli.common] readBlock -> INFO 08a[0m Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[36m2024-07-04 07:28:39.280 UTC [msp] GetDefaultSigningIdentity -> DEBU 08b[0m Obtaining default signing identity
+[36m2024-07-04 07:28:39.281 UTC [grpc] WarningDepth -> DEBU 08c[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:28:39.281 UTC [grpc] InfoDepth -> DEBU 08d[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:39.281 UTC [grpc] InfoDepth -> DEBU 08e[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:39.281 UTC [grpc] InfoDepth -> DEBU 08f[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:39.281 UTC [grpc] InfoDepth -> DEBU 090[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:39.282 UTC [grpc] InfoDepth -> DEBU 091[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:39.282 UTC [grpc] InfoDepth -> DEBU 092[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:39.282 UTC [grpc] InfoDepth -> DEBU 093[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:28:39.282 UTC [grpc] InfoDepth -> DEBU 094[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000428740, {CONNECTING <nil>}
+[36m2024-07-04 07:28:39.282 UTC [grpc] InfoDepth -> DEBU 095[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:39.286 UTC [comm.tls] ClientHandshake -> DEBU 096[0m Client TLS handshake completed in 1.917143ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:28:39.286 UTC [grpc] InfoDepth -> DEBU 097[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:39.287 UTC [grpc] InfoDepth -> DEBU 098[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000428740, {READY <nil>}
+[36m2024-07-04 07:28:39.287 UTC [grpc] InfoDepth -> DEBU 099[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:39.287 UTC [channelCmd] InitCmdFactory -> INFO 09a[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:39.488 UTC [msp.identity] Sign -> DEBU 09b[0m Sign: plaintext: 0A9C080A1508051A0608A79E99B40622...3F513F57BF3412080A021A0012021A00 
+[36m2024-07-04 07:28:39.488 UTC [msp.identity] Sign -> DEBU 09c[0m Sign: digest: 7A1F7F9D66D5F1D91CF27B9496FFF714A12B7EA5E5364DCA7C5DB4C5FA67BC37 
+[34m2024-07-04 07:28:39.491 UTC [cli.common] readBlock -> INFO 09d[0m Received block: 0
+Joining App Channel for all peers...
+[36m2024-07-04 07:28:50.257 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:50.258 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:50.349 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:50.353 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:50.353 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts
+[36m2024-07-04 07:28:50.356 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:50.356 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts
+[36m2024-07-04 07:28:50.358 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts/ca-org1-7054-ca-org1.pem
+[36m2024-07-04 07:28:50.358 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/admincerts
+[36m2024-07-04 07:28:50.358 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:50.358 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:50.358 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:50.358 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:50.359 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls
+[36m2024-07-04 07:28:50.359 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:50.359 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:50.360 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:50.360 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:50.360 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:50.360 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org1MSP
+[36m2024-07-04 07:28:50.360 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGTCCAb+gAwIBAgIUMmyZHsDUmq4kB9aPK9stbHI0u/IwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzExEDAOBgNVBAsTB2NhLW9yZzExEDAOBgNVBAMTB2Nh
+LW9yZzEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR2Yb7lOKVZgyfDkZ4m1tId
+nGjpfaKpQrfRWII8FjlZZh+ybypgjWD0dt6gc0QgIHZz3Xi+a6XGRCq3A3XWnFdE
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/jOhTSVmAzBRToBq9z22VNZBQYcwCgYIKoZIzj0EAwIDSAAwRQIhAMXlHsrh
+YgPPfSiqhwHt8fxW2Zzh1Gvz7FthkHwSMY6VAiAR+wkq8hSKfElqsgjBPoDQz3K7
+FJAVT4eMFMfcwg5y5w==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:50.361 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:50.362 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6] at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6_sk]...
+[36m2024-07-04 07:28:50.362 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:50.442 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:50.443 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org1:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 021[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000456390, {CONNECTING <nil>}
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 022[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:50.450 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Subchannel picks a new address "peer0-org1:7051" to connect
+[36m2024-07-04 07:28:50.455 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 2.615696ms remoteaddress=10.110.177.143:7051
+[36m2024-07-04 07:28:50.456 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:50.456 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000456390, {READY <nil>}
+[36m2024-07-04 07:28:50.456 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:50.456 UTC [channelCmd] InitCmdFactory -> INFO 028[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:50.458 UTC [msp.identity] Sign -> DEBU 029[0m Sign: plaintext: 0AE3080A5C08011A0C08B29E99B40610...6F72DFB31A0A0A000A000A000A000A00 
+[36m2024-07-04 07:28:50.458 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: digest: DC4285D8FFDC9C4FFF0A0408D4E05C744A13324DA699D43B9724CA45056A30DB 
+[34m2024-07-04 07:28:51.044 UTC [channelCmd] executeJoin -> INFO 02b[0m Successfully submitted proposal to join channel
+[36m2024-07-04 07:28:51.752 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:51.753 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:51.763 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:51.847 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:51.847 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts
+[36m2024-07-04 07:28:51.848 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:51.849 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts
+[36m2024-07-04 07:28:51.849 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts/ca-org1-7054-ca-org1.pem
+[36m2024-07-04 07:28:51.850 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/admincerts
+[36m2024-07-04 07:28:51.850 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:51.851 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:51.851 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:51.851 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:51.851 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls
+[36m2024-07-04 07:28:51.852 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:51.852 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:51.853 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:51.853 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:51.854 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:51.854 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org1MSP
+[36m2024-07-04 07:28:51.855 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGTCCAb+gAwIBAgIUMmyZHsDUmq4kB9aPK9stbHI0u/IwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzExEDAOBgNVBAsTB2NhLW9yZzExEDAOBgNVBAMTB2Nh
+LW9yZzEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR2Yb7lOKVZgyfDkZ4m1tId
+nGjpfaKpQrfRWII8FjlZZh+ybypgjWD0dt6gc0QgIHZz3Xi+a6XGRCq3A3XWnFdE
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/jOhTSVmAzBRToBq9z22VNZBQYcwCgYIKoZIzj0EAwIDSAAwRQIhAMXlHsrh
+YgPPfSiqhwHt8fxW2Zzh1Gvz7FthkHwSMY6VAiAR+wkq8hSKfElqsgjBPoDQz3K7
+FJAVT4eMFMfcwg5y5w==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:51.856 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:51.857 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6] at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6_sk]...
+[36m2024-07-04 07:28:51.858 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:51.862 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:51.862 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org1:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 021[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000446a20, {CONNECTING <nil>}
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 022[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:51.863 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Subchannel picks a new address "peer0-org1:7051" to connect
+[36m2024-07-04 07:28:51.867 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 1.862201ms remoteaddress=10.110.177.143:7051
+[36m2024-07-04 07:28:51.868 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:51.868 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000446a20, {READY <nil>}
+[36m2024-07-04 07:28:51.868 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:51.868 UTC [channelCmd] InitCmdFactory -> INFO 028[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:51.868 UTC [msp.identity] Sign -> DEBU 029[0m Sign: plaintext: 0AE3080A5C08031A0C08B39E99B40610...631A0D0A0B4765744368616E6E656C73 
+[36m2024-07-04 07:28:51.868 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: digest: DFFFC0956F3CF31908E74AAEDA839AFAFB3AA1A7E5E81C28DA541231C366626B 
+Channels peers has joined: 
+mychannel
+[36m2024-07-04 07:28:52.709 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:52.711 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:52.896 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:52.907 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:52.907 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts
+[36m2024-07-04 07:28:52.910 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:52.911 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts
+[36m2024-07-04 07:28:52.913 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts/ca-org2-8054-ca-org2.pem
+[36m2024-07-04 07:28:52.915 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/admincerts
+[36m2024-07-04 07:28:52.916 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:52.916 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:52.916 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:52.917 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:52.917 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls
+[36m2024-07-04 07:28:52.918 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:52.920 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:52.921 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:52.921 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:52.921 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:52.923 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org2MSP
+[36m2024-07-04 07:28:52.924 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUbK0o5frPv+1Ae6GLwCe8BrPVqH0wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzIxEDAOBgNVBAsTB2NhLW9yZzIxEDAOBgNVBAMTB2Nh
+LW9yZzIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASGY9UoNF3uBgi3mlljHBiR
+1kWYMMGSRaf92m3mrMC+gzPe+tYRHFIynEuicTBxHxM7OK7tz56rQgofYnpSfC0m
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/Quhlp78lFgCa8zFdWkzN1dg+AgwCgYIKoZIzj0EAwIDRwAwRAIgAd8BNELY
+R9Pl8VmiQr9betaMvjyJRR8LAN57MwMouRMCIAeLb+LnNVP3hNGjP5i8j0q4FfL+
+ItxyjrkBiKWeAUcY
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:52.925 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:52.926 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c] at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c_sk]...
+[36m2024-07-04 07:28:52.928 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:52.928 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:52.929 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:52.931 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:52.931 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:52.931 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org2:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:52.931 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:52.931 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:52.932 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:52.932 UTC [grpc] InfoDepth -> DEBU 021[0m [core]Subchannel picks a new address "peer0-org2:7051" to connect
+[36m2024-07-04 07:28:52.995 UTC [grpc] InfoDepth -> DEBU 022[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002a4ab0, {CONNECTING <nil>}
+[36m2024-07-04 07:28:52.996 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:53.005 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 3.504924ms remoteaddress=10.108.72.181:7051
+[36m2024-07-04 07:28:53.006 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:53.006 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002a4ab0, {READY <nil>}
+[36m2024-07-04 07:28:53.006 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:53.006 UTC [channelCmd] InitCmdFactory -> INFO 028[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:53.009 UTC [msp.identity] Sign -> DEBU 029[0m Sign: plaintext: 0AE2080A5B08011A0B08B59E99B40610...6F72DFB31A0A0A000A000A000A000A00 
+[36m2024-07-04 07:28:53.009 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: digest: 55B6C5DEFA2DA9DBF72D78BF7D5610A23A30D58B7466ACA3F1B55CDDEC0A0C18 
+[34m2024-07-04 07:28:53.471 UTC [channelCmd] executeJoin -> INFO 02b[0m Successfully submitted proposal to join channel
+[36m2024-07-04 07:28:54.298 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:54.299 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:54.309 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:54.395 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:54.395 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts
+[36m2024-07-04 07:28:54.397 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:54.398 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts
+[36m2024-07-04 07:28:54.399 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts/ca-org2-8054-ca-org2.pem
+[36m2024-07-04 07:28:54.400 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/admincerts
+[36m2024-07-04 07:28:54.400 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:54.400 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:54.400 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:54.400 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:54.401 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls
+[36m2024-07-04 07:28:54.401 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:54.402 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:54.403 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:54.403 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:54.403 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:54.404 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org2MSP
+[36m2024-07-04 07:28:54.404 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUbK0o5frPv+1Ae6GLwCe8BrPVqH0wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzIxEDAOBgNVBAsTB2NhLW9yZzIxEDAOBgNVBAMTB2Nh
+LW9yZzIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASGY9UoNF3uBgi3mlljHBiR
+1kWYMMGSRaf92m3mrMC+gzPe+tYRHFIynEuicTBxHxM7OK7tz56rQgofYnpSfC0m
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/Quhlp78lFgCa8zFdWkzN1dg+AgwCgYIKoZIzj0EAwIDRwAwRAIgAd8BNELY
+R9Pl8VmiQr9betaMvjyJRR8LAN57MwMouRMCIAeLb+LnNVP3hNGjP5i8j0q4FfL+
+ItxyjrkBiKWeAUcY
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:54.405 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:54.406 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c] at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c_sk]...
+[36m2024-07-04 07:28:54.406 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:54.407 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:54.407 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org2:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 021[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00034a180, {CONNECTING <nil>}
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 022[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:54.408 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Subchannel picks a new address "peer0-org2:7051" to connect
+[36m2024-07-04 07:28:54.413 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 2.369299ms remoteaddress=10.108.72.181:7051
+[36m2024-07-04 07:28:54.414 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:54.414 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00034a180, {READY <nil>}
+[36m2024-07-04 07:28:54.414 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:54.414 UTC [channelCmd] InitCmdFactory -> INFO 028[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:54.414 UTC [msp.identity] Sign -> DEBU 029[0m Sign: plaintext: 0AE3080A5C08031A0C08B69E99B40610...631A0D0A0B4765744368616E6E656C73 
+[36m2024-07-04 07:28:54.414 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: digest: 4E2561B0B43D238D7D2D4266E145861EDD9BA0B1902456E1F1AE3E6C7E127B49 
+Channels peers has joined: 
+mychannel
+[36m2024-07-04 07:28:55.104 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:55.106 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:55.205 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:55.213 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:55.213 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts
+[36m2024-07-04 07:28:55.215 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:55.216 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts
+[36m2024-07-04 07:28:55.218 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts/ca-org3-9054-ca-org3.pem
+[36m2024-07-04 07:28:55.219 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/admincerts
+[36m2024-07-04 07:28:55.220 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:55.220 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:55.220 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:55.221 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:55.221 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls
+[36m2024-07-04 07:28:55.221 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:55.223 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:55.295 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:55.295 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:55.295 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:55.296 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org3MSP
+[36m2024-07-04 07:28:55.297 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUf/L6I9lVo+JNGyepo6JpmuyeXA4wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzMxEDAOBgNVBAsTB2NhLW9yZzMxEDAOBgNVBAMTB2Nh
+LW9yZzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR7tkTF4S+LJ7TX8JZR73GO
+4BlY1EuaH0LXo96yZUnh8nXHPvQZ8rNoH4UdTNsTO5J4BCMzmb9pxuVNfp4m5S5Y
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQUyCsD93PbjjKc4fI4ymTqHbFC9sMwCgYIKoZIzj0EAwIDRwAwRAIgU8z/2GS9
+z/4BZvcxagVfsIvL6tCSkGgn+9NDsnWE1UECIBLpJKgqCpGGq5T/6ozZZCvYk0/7
+0qjiygnbT5FHP+Jz
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:55.298 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:55.300 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af] at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af_sk]...
+[36m2024-07-04 07:28:55.301 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:55.302 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:55.304 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org3:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:55.306 UTC [grpc] InfoDepth -> DEBU 021[0m [core]Subchannel picks a new address "peer0-org3:7051" to connect
+[36m2024-07-04 07:28:55.307 UTC [grpc] InfoDepth -> DEBU 022[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000334f50, {CONNECTING <nil>}
+[36m2024-07-04 07:28:55.307 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:55.312 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 2.069152ms remoteaddress=10.105.93.165:7051
+[36m2024-07-04 07:28:55.313 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:55.313 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000334f50, {READY <nil>}
+[36m2024-07-04 07:28:55.313 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:55.313 UTC [channelCmd] InitCmdFactory -> INFO 028[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:55.314 UTC [msp.identity] Sign -> DEBU 029[0m Sign: plaintext: 0ADF080A5C08011A0C08B79E99B40610...6F72DFB31A0A0A000A000A000A000A00 
+[36m2024-07-04 07:28:55.314 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: digest: 1C2E3588F21E9DDB0C7E163FD23C20428E3DDD37E9C4CCD9428A5429485BE9C9 
+[34m2024-07-04 07:28:55.822 UTC [channelCmd] executeJoin -> INFO 02b[0m Successfully submitted proposal to join channel
+[36m2024-07-04 07:28:56.702 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:56.704 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:56.800 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:28:56.806 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore]...done
+[36m2024-07-04 07:28:56.807 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts
+[36m2024-07-04 07:28:56.808 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:28:56.808 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts
+[36m2024-07-04 07:28:56.810 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts/ca-org3-9054-ca-org3.pem
+[36m2024-07-04 07:28:56.810 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/admincerts
+[36m2024-07-04 07:28:56.811 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts
+[36m2024-07-04 07:28:56.811 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:28:56.811 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts
+[36m2024-07-04 07:28:56.811 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:28:56.811 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls
+[36m2024-07-04 07:28:56.811 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:28:56.812 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:28:56.813 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:28:56.813 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:28:56.813 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:28:56.814 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org3MSP
+[36m2024-07-04 07:28:56.814 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUf/L6I9lVo+JNGyepo6JpmuyeXA4wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzMxEDAOBgNVBAsTB2NhLW9yZzMxEDAOBgNVBAMTB2Nh
+LW9yZzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR7tkTF4S+LJ7TX8JZR73GO
+4BlY1EuaH0LXo96yZUnh8nXHPvQZ8rNoH4UdTNsTO5J4BCMzmb9pxuVNfp4m5S5Y
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQUyCsD93PbjjKc4fI4ymTqHbFC9sMwCgYIKoZIzj0EAwIDRwAwRAIgU8z/2GS9
+z/4BZvcxagVfsIvL6tCSkGgn+9NDsnWE1UECIBLpJKgqCpGGq5T/6ozZZCvYk0/7
+0qjiygnbT5FHP+Jz
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:56.815 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:56.816 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af] at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af_sk]...
+[36m2024-07-04 07:28:56.816 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:28:56.817 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:28:56.817 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:28:56.817 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:28:56.817 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:28:56.818 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org3:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:28:56.818 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:28:56.818 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:28:56.818 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:56.895 UTC [grpc] InfoDepth -> DEBU 021[0m [core]Subchannel picks a new address "peer0-org3:7051" to connect
+[36m2024-07-04 07:28:56.896 UTC [grpc] InfoDepth -> DEBU 022[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002af390, {CONNECTING <nil>}
+[36m2024-07-04 07:28:56.896 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:28:56.901 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 3.244371ms remoteaddress=10.105.93.165:7051
+[36m2024-07-04 07:28:56.903 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:28:56.904 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002af390, {READY <nil>}
+[36m2024-07-04 07:28:56.904 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:28:56.904 UTC [channelCmd] InitCmdFactory -> INFO 028[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:28:56.905 UTC [msp.identity] Sign -> DEBU 029[0m Sign: plaintext: 0ADF080A5C08031A0C08B89E99B40610...631A0D0A0B4765744368616E6E656C73 
+[36m2024-07-04 07:28:56.905 UTC [msp.identity] Sign -> DEBU 02a[0m Sign: digest: 3586397BC190FF274135C3599ECF94F217F6DCFFDB8B65D918E89B6F144568E5 
+Channels peers has joined: 
+mychannel
+Updating Anchor Peers...
+[36m2024-07-04 07:29:07.649 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:07.651 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:07.751 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:07.756 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore]...done
+[36m2024-07-04 07:29:07.756 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts
+[36m2024-07-04 07:29:07.756 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:29:07.757 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts
+[36m2024-07-04 07:29:07.757 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts/ca-org1-7054-ca-org1.pem
+[36m2024-07-04 07:29:07.757 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/admincerts
+[36m2024-07-04 07:29:07.757 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts
+[36m2024-07-04 07:29:07.758 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:29:07.758 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts
+[36m2024-07-04 07:29:07.758 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:29:07.758 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls
+[36m2024-07-04 07:29:07.758 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:29:07.758 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:29:07.759 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:29:07.759 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:29:07.759 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:29:07.759 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org1MSP
+[36m2024-07-04 07:29:07.760 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGTCCAb+gAwIBAgIUMmyZHsDUmq4kB9aPK9stbHI0u/IwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzExEDAOBgNVBAsTB2NhLW9yZzExEDAOBgNVBAMTB2Nh
+LW9yZzEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR2Yb7lOKVZgyfDkZ4m1tId
+nGjpfaKpQrfRWII8FjlZZh+ybypgjWD0dt6gc0QgIHZz3Xi+a6XGRCq3A3XWnFdE
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/jOhTSVmAzBRToBq9z22VNZBQYcwCgYIKoZIzj0EAwIDSAAwRQIhAMXlHsrh
+YgPPfSiqhwHt8fxW2Zzh1Gvz7FthkHwSMY6VAiAR+wkq8hSKfElqsgjBPoDQz3K7
+FJAVT4eMFMfcwg5y5w==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:07.760 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:07.761 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6] at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6_sk]...
+[36m2024-07-04 07:29:07.761 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:07.763 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:29:07.763 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[34m2024-07-04 07:29:07.763 UTC [channelCmd] InitCmdFactory -> INFO 01b[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:29:07.765 UTC [msp.identity] Sign -> DEBU 01c[0m Sign: plaintext: 0AE5070A074F7267314D535012D9072D...65616465727312002A0641646D696E73 
+[36m2024-07-04 07:29:07.765 UTC [msp.identity] Sign -> DEBU 01d[0m Sign: digest: 58E2811B72D6207BA4D1D0002596B93D248B4B3598F3FB123B72CF8B6B14D495 
+[36m2024-07-04 07:29:07.766 UTC [msp.identity] Sign -> DEBU 01e[0m Sign: plaintext: 0A9C080A1508021A0608C39E99B40622...7D7A33B907C60886798A2B5E9409C1A1 
+[36m2024-07-04 07:29:07.766 UTC [msp.identity] Sign -> DEBU 01f[0m Sign: digest: 2064BE24A322A4F0EE95F5B3BF42F5BC0C686C4F0C463692463DB2D4F71D1572 
+[36m2024-07-04 07:29:07.766 UTC [grpc] WarningDepth -> DEBU 020[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:29:07.766 UTC [grpc] InfoDepth -> DEBU 021[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:07.766 UTC [grpc] InfoDepth -> DEBU 022[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:07.766 UTC [grpc] InfoDepth -> DEBU 023[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:07.766 UTC [grpc] InfoDepth -> DEBU 024[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:07.767 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:07.767 UTC [grpc] InfoDepth -> DEBU 026[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:07.767 UTC [grpc] InfoDepth -> DEBU 027[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00033f320, {CONNECTING <nil>}
+[36m2024-07-04 07:29:07.767 UTC [grpc] InfoDepth -> DEBU 028[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:07.767 UTC [grpc] InfoDepth -> DEBU 029[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:29:07.771 UTC [comm.tls] ClientHandshake -> DEBU 02a[0m Client TLS handshake completed in 1.809886ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:29:07.771 UTC [grpc] InfoDepth -> DEBU 02b[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:07.771 UTC [grpc] InfoDepth -> DEBU 02c[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00033f320, {READY <nil>}
+[36m2024-07-04 07:29:07.771 UTC [grpc] InfoDepth -> DEBU 02d[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:29:07.841 UTC [channelCmd] update -> INFO 02e[0m Successfully submitted channel update
+[36m2024-07-04 07:29:08.607 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:08.608 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:08.708 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:08.796 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore]...done
+[36m2024-07-04 07:29:08.797 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts
+[36m2024-07-04 07:29:08.798 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:29:08.798 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts
+[36m2024-07-04 07:29:08.799 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts/ca-org2-8054-ca-org2.pem
+[36m2024-07-04 07:29:08.800 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/admincerts
+[36m2024-07-04 07:29:08.801 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts
+[36m2024-07-04 07:29:08.801 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:29:08.801 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts
+[36m2024-07-04 07:29:08.802 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:29:08.802 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls
+[36m2024-07-04 07:29:08.803 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:29:08.803 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:29:08.804 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:29:08.804 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:29:08.805 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:29:08.806 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org2MSP
+[36m2024-07-04 07:29:08.807 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUbK0o5frPv+1Ae6GLwCe8BrPVqH0wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzIxEDAOBgNVBAsTB2NhLW9yZzIxEDAOBgNVBAMTB2Nh
+LW9yZzIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASGY9UoNF3uBgi3mlljHBiR
+1kWYMMGSRaf92m3mrMC+gzPe+tYRHFIynEuicTBxHxM7OK7tz56rQgofYnpSfC0m
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/Quhlp78lFgCa8zFdWkzN1dg+AgwCgYIKoZIzj0EAwIDRwAwRAIgAd8BNELY
+R9Pl8VmiQr9betaMvjyJRR8LAN57MwMouRMCIAeLb+LnNVP3hNGjP5i8j0q4FfL+
+ItxyjrkBiKWeAUcY
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:08.807 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:08.808 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c] at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c_sk]...
+[36m2024-07-04 07:29:08.809 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:08.809 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:29:08.810 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[34m2024-07-04 07:29:08.810 UTC [channelCmd] InitCmdFactory -> INFO 01b[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:29:08.812 UTC [msp.identity] Sign -> DEBU 01c[0m Sign: plaintext: 0AE5070A074F7267324D535012D9072D...73656D656E7412002A0641646D696E73 
+[36m2024-07-04 07:29:08.812 UTC [msp.identity] Sign -> DEBU 01d[0m Sign: digest: 3A30A6A0AB098CF92F1DC6D08AD9E52EBF3A1A32C0556309D3AA69E39A107A9E 
+[36m2024-07-04 07:29:08.812 UTC [msp.identity] Sign -> DEBU 01e[0m Sign: plaintext: 0A9C080A1508021A0608C49E99B40622...289573FC5DA485FC8EF2DBEBAB977661 
+[36m2024-07-04 07:29:08.812 UTC [msp.identity] Sign -> DEBU 01f[0m Sign: digest: 2FDCFA0EE4E4FDCF784F9D7700D8E0659BE362C92D1F6843D4973432A64DA73A 
+[36m2024-07-04 07:29:08.816 UTC [grpc] WarningDepth -> DEBU 020[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 021[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 022[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 023[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 024[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 026[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 027[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000329240, {CONNECTING <nil>}
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 028[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:08.816 UTC [grpc] InfoDepth -> DEBU 029[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:29:08.820 UTC [comm.tls] ClientHandshake -> DEBU 02a[0m Client TLS handshake completed in 1.132353ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:29:08.820 UTC [grpc] InfoDepth -> DEBU 02b[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:08.820 UTC [grpc] InfoDepth -> DEBU 02c[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000329240, {READY <nil>}
+[36m2024-07-04 07:29:08.820 UTC [grpc] InfoDepth -> DEBU 02d[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:29:08.831 UTC [channelCmd] update -> INFO 02e[0m Successfully submitted channel update
+[36m2024-07-04 07:29:09.496 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:09.498 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:09.596 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:09.603 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore]...done
+[36m2024-07-04 07:29:09.603 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts
+[36m2024-07-04 07:29:09.604 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:29:09.605 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts
+[36m2024-07-04 07:29:09.606 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts/ca-org3-9054-ca-org3.pem
+[36m2024-07-04 07:29:09.606 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/admincerts
+[36m2024-07-04 07:29:09.606 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts
+[36m2024-07-04 07:29:09.606 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:29:09.606 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts
+[36m2024-07-04 07:29:09.607 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:29:09.607 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls
+[36m2024-07-04 07:29:09.607 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:29:09.608 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:29:09.608 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:29:09.608 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:29:09.609 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:29:09.609 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org3MSP
+[36m2024-07-04 07:29:09.610 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUf/L6I9lVo+JNGyepo6JpmuyeXA4wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzMxEDAOBgNVBAsTB2NhLW9yZzMxEDAOBgNVBAMTB2Nh
+LW9yZzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR7tkTF4S+LJ7TX8JZR73GO
+4BlY1EuaH0LXo96yZUnh8nXHPvQZ8rNoH4UdTNsTO5J4BCMzmb9pxuVNfp4m5S5Y
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQUyCsD93PbjjKc4fI4ymTqHbFC9sMwCgYIKoZIzj0EAwIDRwAwRAIgU8z/2GS9
+z/4BZvcxagVfsIvL6tCSkGgn+9NDsnWE1UECIBLpJKgqCpGGq5T/6ozZZCvYk0/7
+0qjiygnbT5FHP+Jz
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:09.610 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:09.611 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af] at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af_sk]...
+[36m2024-07-04 07:29:09.612 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:09.612 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:29:09.613 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[34m2024-07-04 07:29:09.613 UTC [channelCmd] InitCmdFactory -> INFO 01b[0m Endorser and orderer connections initialized
+[36m2024-07-04 07:29:09.615 UTC [msp.identity] Sign -> DEBU 01c[0m Sign: plaintext: 0AE1070A074F7267334D535012D5072D...73656D656E7412002A0641646D696E73 
+[36m2024-07-04 07:29:09.615 UTC [msp.identity] Sign -> DEBU 01d[0m Sign: digest: A4D2A361A2128579D22E2E7A7CEFB2589D731356DF0AE4D398DA7239C914B26F 
+[36m2024-07-04 07:29:09.615 UTC [msp.identity] Sign -> DEBU 01e[0m Sign: plaintext: 0A98080A1508021A0608C59E99B40622...E92724A53F5AA4A9907834FA61516342 
+[36m2024-07-04 07:29:09.615 UTC [msp.identity] Sign -> DEBU 01f[0m Sign: digest: 56DAB92BF5A34824FCDE90D0E6F3EAE696BDFD7A3E6F6ACBF0504F0E0FEB06C3 
+[36m2024-07-04 07:29:09.616 UTC [grpc] WarningDepth -> DEBU 020[0m [core]Adjusting keepalive ping interval to minimum period of 10s
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 021[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 022[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 023[0m [core]ccResolverWrapper: sending update to cc: {[{orderer:7050  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 024[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 026[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Subchannel picks a new address "orderer:7050" to connect
+[36m2024-07-04 07:29:09.616 UTC [grpc] InfoDepth -> DEBU 028[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000449150, {CONNECTING <nil>}
+[36m2024-07-04 07:29:09.617 UTC [grpc] InfoDepth -> DEBU 029[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:09.619 UTC [comm.tls] ClientHandshake -> DEBU 02a[0m Client TLS handshake completed in 1.063534ms remoteaddress=10.103.122.96:7050
+[36m2024-07-04 07:29:09.619 UTC [grpc] InfoDepth -> DEBU 02b[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:09.620 UTC [grpc] InfoDepth -> DEBU 02c[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000449150, {READY <nil>}
+[36m2024-07-04 07:29:09.620 UTC [grpc] InfoDepth -> DEBU 02d[0m [core]Channel Connectivity change to READY
+[34m2024-07-04 07:29:09.695 UTC [channelCmd] update -> INFO 02e[0m Successfully submitted channel update
+Packaging Chaincode...
+Generate Connection JSON FOR ORG2...
+Generate Connection JSON FOR ORG3...
+total 16
+-rw-r--r-- 1 root   root    545 Jul  4 15:29 basic-org1.tgz
+-rw-r--r-- 1 root   root    533 Jul  4 15:29 basic-org2.tgz
+-rw-r--r-- 1 root   root    533 Jul  4 15:29 basic-org3.tgz
+-rw-r--r-- 1 nobody nogroup  46 Jul  4 15:25 metadata.json
+Installing Chaincode to all peers...
+[36m2024-07-04 07:29:20.851 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:20.852 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:20.945 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:20.953 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore]...done
+[36m2024-07-04 07:29:20.953 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts
+[36m2024-07-04 07:29:20.954 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:29:20.954 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts
+[36m2024-07-04 07:29:20.955 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/cacerts/ca-org1-7054-ca-org1.pem
+[36m2024-07-04 07:29:20.955 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/admincerts
+[36m2024-07-04 07:29:20.955 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts
+[36m2024-07-04 07:29:20.956 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:29:20.956 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts
+[36m2024-07-04 07:29:20.956 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:29:20.956 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls
+[36m2024-07-04 07:29:20.956 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:29:20.957 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:29:20.957 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:29:20.957 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:29:20.957 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:29:20.958 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org1MSP
+[36m2024-07-04 07:29:20.958 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGTCCAb+gAwIBAgIUMmyZHsDUmq4kB9aPK9stbHI0u/IwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzExEDAOBgNVBAsTB2NhLW9yZzExEDAOBgNVBAMTB2Nh
+LW9yZzEwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR2Yb7lOKVZgyfDkZ4m1tId
+nGjpfaKpQrfRWII8FjlZZh+ybypgjWD0dt6gc0QgIHZz3Xi+a6XGRCq3A3XWnFdE
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/jOhTSVmAzBRToBq9z22VNZBQYcwCgYIKoZIzj0EAwIDSAAwRQIhAMXlHsrh
+YgPPfSiqhwHt8fxW2Zzh1Gvz7FthkHwSMY6VAiAR+wkq8hSKfElqsgjBPoDQz3K7
+FJAVT4eMFMfcwg5y5w==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:20.959 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:20.960 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6] at [/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/e4fd7dba34b2fbc9a29b268dbc54dbe68b1a5e06d259bf37c85ce28436b8a6c6_sk]...
+[36m2024-07-04 07:29:20.960 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUIG0dRn6f7y4jjHlMemv2t+vLIJwwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMTEQMA4GA1UECxMHY2Etb3JnMTEQMA4GA1UE
+AxMHY2Etb3JnMTAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcxYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAASxleBCWmooDZRPqZADocKObVg5kS3GKdCL
+7t9Q4CMN5UQviylCBD+ClQ/W3QPP/kqhaYecAm9babgMS5jTnESxo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBS9+8nZXitqDrhL
+T7ZP6MgudHDyRTAfBgNVHSMEGDAWgBT+M6FNJWYDMFFOgGr3PbZU1kFBhzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcxYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhAPauzI0a
+Gc++mbt4kS5UdACcSS6FnolVIEOHNo/0QxWxAiAD6BGgzo5yg5DktTB1O2IP9Vkq
+aCnJI7W9p7RdiJmo5Q==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:20.960 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:29:20.961 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:29:20.962 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:20.962 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:20.962 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org1:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:20.962 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:20.962 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:20.963 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:20.963 UTC [grpc] InfoDepth -> DEBU 021[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000445910, {CONNECTING <nil>}
+[36m2024-07-04 07:29:20.963 UTC [grpc] InfoDepth -> DEBU 022[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:20.963 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Subchannel picks a new address "peer0-org1:7051" to connect
+[36m2024-07-04 07:29:20.967 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 2.003564ms remoteaddress=10.110.177.143:7051
+[36m2024-07-04 07:29:21.041 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:21.042 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000445910, {READY <nil>}
+[36m2024-07-04 07:29:21.042 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:29:21.043 UTC [grpc] InfoDepth -> DEBU 028[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:21.043 UTC [grpc] InfoDepth -> DEBU 029[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:21.043 UTC [grpc] InfoDepth -> DEBU 02a[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org1:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:21.043 UTC [grpc] InfoDepth -> DEBU 02b[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:21.044 UTC [grpc] InfoDepth -> DEBU 02c[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:21.044 UTC [grpc] InfoDepth -> DEBU 02d[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:21.044 UTC [grpc] InfoDepth -> DEBU 02e[0m [core]Subchannel picks a new address "peer0-org1:7051" to connect
+[36m2024-07-04 07:29:21.044 UTC [grpc] InfoDepth -> DEBU 02f[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00046e2e0, {CONNECTING <nil>}
+[36m2024-07-04 07:29:21.045 UTC [grpc] InfoDepth -> DEBU 030[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:21.050 UTC [comm.tls] ClientHandshake -> DEBU 031[0m Client TLS handshake completed in 2.573854ms remoteaddress=10.110.177.143:7051
+[36m2024-07-04 07:29:21.051 UTC [grpc] InfoDepth -> DEBU 032[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:21.051 UTC [grpc] InfoDepth -> DEBU 033[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00046e2e0, {READY <nil>}
+[36m2024-07-04 07:29:21.051 UTC [grpc] InfoDepth -> DEBU 034[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:29:21.053 UTC [msp.identity] Sign -> DEBU 035[0m Sign: plaintext: 0AE8080A6108031A0B08D19E99B40610...60148C8251800E00EAE4042300280000 
+[36m2024-07-04 07:29:21.053 UTC [msp.identity] Sign -> DEBU 036[0m Sign: digest: 2A2A2F89D5E24A716B98A4717ABEE6268A4219B9690D4C3E58669051D9D857B6 
+Error: chaincode install failed with status: 500 - failed to invoke backing implementation of 'InstallChaincode': could not build chaincode: docker build failed: docker image inspection failed: Get "http://unix.sock/images/dev-peer0-org1-basic-8a134865a4f75aafa14a1d9f568e6c410d8d6f179d82b7e161026e4e9625ffd4-870b47c2b7ce386671435e9361c2dafe157d2426c04c518cdac10be0d247db58/json": dial unix /var/run/docker.sock: connect: no such file or directory
+command terminated with exit code 1
+[36m2024-07-04 07:29:23.008 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:23.009 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:23.102 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:23.109 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore]...done
+[36m2024-07-04 07:29:23.109 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/cacerts/ca-org2-8054-ca-org2.pem
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/admincerts
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts
+[36m2024-07-04 07:29:23.110 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts
+[36m2024-07-04 07:29:23.110 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:29:23.110 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls
+[36m2024-07-04 07:29:23.110 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:29:23.111 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:29:23.111 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based Mno suchSP instance
+[36m2024-07-04 07:29:23.111 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:29:23.111 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:29:23.195 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org2MSP
+[36m2024-07-04 07:29:23.196 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUbK0o5frPv+1Ae6GLwCe8BrPVqH0wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzIxEDAOBgNVBAsTB2NhLW9yZzIxEDAOBgNVBAMTB2Nh
+LW9yZzIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASGY9UoNF3uBgi3mlljHBiR
+1kWYMMGSRaf92m3mrMC+gzPe+tYRHFIynEuicTBxHxM7OK7tz56rQgofYnpSfC0m
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQU/Quhlp78lFgCa8zFdWkzN1dg+AgwCgYIKoZIzj0EAwIDRwAwRAIgAd8BNELY
+R9Pl8VmiQr9betaMvjyJRR8LAN57MwMouRMCIAeLb+LnNVP3hNGjP5i8j0q4FfL+
+ItxyjrkBiKWeAUcY
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:23.196 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:23.198 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c] at [/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/c9c852ad6c3e3ceca0cbea9b063f8534280f249454b0894cb9f0976d95d6879c_sk]...
+[36m2024-07-04 07:29:23.198 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqTCCAk+gAwIBAgIUdO75ht/kQ0GHkYMNRGU0p/mhMa8wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMjEQMA4GA1UECxMHY2Etb3JnMjEQMA4GA1UE
+AxMHY2Etb3JnMjAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmcyYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQ6Hm+3J+qrP0TFm8aAKsUGaHHYHr/HMwJt
+vHACIZGddH5lV37V4mGnbVfvkO8TqLoWC6bKxoTKolB154RJwMHvo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBRpnqwuIVI5gUWy
+jMcFKZ0MUe9RSTAfBgNVHSMEGDAWgBT9C6GWnvyUWAJrzMV1aTM3V2D4CDAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmcyYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDSAAwRQIhANLG2nJ8
+LQA2lKAqgNIcze46LBpjnv1wgve5wpLJlpaEAiAm7hxlDrHUDrdJdZ3svnoyb14t
+YyTrRvu9EIg90vSOzA==
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:23.199 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:29:23.200 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org2:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:23.201 UTC [grpc] InfoDepth -> DEBU 021[0m [core]Subchannel picks a new address "peer0-org2:7051" to connect
+[36m2024-07-04 07:29:23.202 UTC [grpc] InfoDepth -> DEBU 022[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0003b4af0, {CONNECTING <nil>}
+[36m2024-07-04 07:29:23.203 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:23.208 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 3.07534ms remoteaddress=10.108.72.181:7051
+[36m2024-07-04 07:29:23.209 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:23.209 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0003b4af0, {READY <nil>}
+[36m2024-07-04 07:29:23.209 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 028[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 029[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 02a[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org2:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 02b[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 02c[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 02d[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 02e[0m [core]Subchannel picks a new address "peer0-org2:7051" to connect
+[36m2024-07-04 07:29:23.210 UTC [grpc] InfoDepth -> DEBU 02f[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002a9500, {CONNECTING <nil>}
+[36m2024-07-04 07:29:23.211 UTC [grpc] InfoDepth -> DEBU 030[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:23.213 UTC [comm.tls] ClientHandshake -> DEBU 031[0m Client TLS handshake completed in 1.595115ms remoteaddress=10.108.72.181:7051
+[36m2024-07-04 07:29:23.214 UTC [grpc] InfoDepth -> DEBU 032[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:23.214 UTC [grpc] InfoDepth -> DEBU 033[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc0002a9500, {READY <nil>}
+[36m2024-07-04 07:29:23.214 UTC [grpc] InfoDepth -> DEBU 034[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:29:23.217 UTC [msp.identity] Sign -> DEBU 035[0m Sign: plaintext: 0AE8080A6108031A0B08D39E99B40610...8C8251300AD001006E5B710900280000 
+[36m2024-07-04 07:29:23.217 UTC [msp.identity] Sign -> DEBU 036[0m Sign: digest: 370025DD429CE7EFEC3BB9AF066099CB82989A45733B18B3C85495CC2DB76E7B 
+Error: chaincode install failed with status: 500 - failed to invoke backing implementation of 'InstallChaincode': could not build chaincode: docker build failed: docker image inspection failed: Get "http://unix.sock/images/dev-peer0-org2-basic-ae14a39b5fbdda117567e6e89f81bccbd49bbf6cebebe90e07a7938011a5a6f3-ba60acae043253c68904e9e8af859750ec9e879e296d7aed85e791ccb5a8ed34/json": dial unix /var/run/docker.sock: connect: no such file or directory
+command terminated with exit code 1
+[36m2024-07-04 07:29:25.107 UTC [bccsp] GetDefault -> DEBU 001[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:25.108 UTC [bccsp] GetDefault -> DEBU 002[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:25.198 UTC [bccsp] GetDefault -> DEBU 003[0m Before using BCCSP, please call InitFactories(). Falling back to bootBCCSP.
+[36m2024-07-04 07:29:25.206 UTC [bccsp_sw] openKeyStore -> DEBU 004[0m KeyStore opened at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore]...done
+[36m2024-07-04 07:29:25.206 UTC [msp] getPemMaterialFromDir -> DEBU 005[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts
+[36m2024-07-04 07:29:25.207 UTC [msp] getPemMaterialFromDir -> DEBU 006[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/signcerts/cert.pem
+[36m2024-07-04 07:29:25.207 UTC [msp] getPemMaterialFromDir -> DEBU 007[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts
+[36m2024-07-04 07:29:25.208 UTC [msp] getPemMaterialFromDir -> DEBU 008[0m Inspecting file /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/cacerts/ca-org3-9054-ca-org3.pem
+[36m2024-07-04 07:29:25.208 UTC [msp] getPemMaterialFromDir -> DEBU 009[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/admincerts
+[36m2024-07-04 07:29:25.208 UTC [msp] getPemMaterialFromDir -> DEBU 00a[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts
+[36m2024-07-04 07:29:25.209 UTC [msp] getMspConfig -> DEBU 00b[0m Intermediate certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/intermediatecerts: no such file or directory]
+[36m2024-07-04 07:29:25.209 UTC [msp] getPemMaterialFromDir -> DEBU 00c[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts
+[36m2024-07-04 07:29:25.209 UTC [msp] getMspConfig -> DEBU 00d[0m TLS CA certs folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlsintermediatecerts]. Skipping and ignoring TLS intermediate CA folder. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/tlscacerts: no such file or directory]
+[36m2024-07-04 07:29:25.209 UTC [msp] getPemMaterialFromDir -> DEBU 00e[0m Reading directory /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls
+[36m2024-07-04 07:29:25.209 UTC [msp] getMspConfig -> DEBU 00f[0m crls folder not found at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls]. Skipping. [stat /organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/crls: no such file or directory]
+[36m2024-07-04 07:29:25.209 UTC [msp] getMspConfig -> DEBU 010[0m Loading NodeOUs
+[36m2024-07-04 07:29:25.210 UTC [msp] newBccspMsp -> DEBU 011[0m Creating BCCSP-based MSP instance
+[36m2024-07-04 07:29:25.210 UTC [msp] New -> DEBU 012[0m Creating Cache-MSP instance
+[36m2024-07-04 07:29:25.210 UTC [msp] loadLocalMSP -> DEBU 013[0m Created new local MSP
+[36m2024-07-04 07:29:25.210 UTC [msp] Setup -> DEBU 014[0m Setting up MSP instance Org3MSP
+[36m2024-07-04 07:29:25.211 UTC [msp.identity] newIdentity -> DEBU 015[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICGDCCAb+gAwIBAgIUf/L6I9lVo+JNGyepo6JpmuyeXA4wCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0zOTA3MDEwNzIxMDBaMGkxCzAJ
+BgNVBAYTAlVTMREwDwYDVQQIEwhOZXcgWW9yazERMA8GA1UEBxMITmV3IFlvcmsx
+EDAOBgNVBAoTB2NhLW9yZzMxEDAOBgNVBAsTB2NhLW9yZzMxEDAOBgNVBAMTB2Nh
+LW9yZzMwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAR7tkTF4S+LJ7TX8JZR73GO
+4BlY1EuaH0LXo96yZUnh8nXHPvQZ8rNoH4UdTNsTO5J4BCMzmb9pxuVNfp4m5S5Y
+o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4E
+FgQUyCsD93PbjjKc4fI4ymTqHbFC9sMwCgYIKoZIzj0EAwIDRwAwRAIgU8z/2GS9
+z/4BZvcxagVfsIvL6tCSkGgn+9NDsnWE1UECIBLpJKgqCpGGq5T/6ozZZCvYk0/7
+0qjiygnbT5FHP+Jz
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:25.211 UTC [msp.identity] newIdentity -> DEBU 016[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:25.212 UTC [bccsp_sw] loadPrivateKey -> DEBU 017[0m Loading private key [0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af] at [/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/0ad8e1b9e5a9cdd95d30479c90da90ac4a2c1ccf21419f76ba2ffcf0141c34af_sk]...
+[36m2024-07-04 07:29:25.213 UTC [msp.identity] newIdentity -> DEBU 018[0m Creating identity instance for cert -----BEGIN CERTIFICATE-----
+MIICqDCCAk+gAwIBAgIUeEWFiSCZV2IbZcnndRskYZY6ztYwCgYIKoZIzj0EAwIw
+aTELMAkGA1UEBhMCVVMxETAPBgNVBAgTCE5ldyBZb3JrMREwDwYDVQQHEwhOZXcg
+WW9yazEQMA4GA1UEChMHY2Etb3JnMzEQMA4GA1UECxMHY2Etb3JnMzEQMA4GA1UE
+AxMHY2Etb3JnMzAeFw0yNDA3MDQwNzIxMDBaFw0yNTA3MDQwNzI2MDBaMGAxCzAJ
+BgNVBAYTAlVTMRcwFQYDVQQIEw5Ob3J0aCBDYXJvbGluYTEUMBIGA1UEChMLSHlw
+ZXJsZWRnZXIxDjAMBgNVBAsTBWFkbWluMRIwEAYDVQQDEwlvcmczYWRtaW4wWTAT
+BgcqhkjOPQIBBggqhkjOPQMBBwNCAAQKP0LwiJftxbLOFRhe7dgwQ2MZ+TxTA0fs
+qlZYPGlwaniPlL6SA+lt7LDhAgXRcKcMY5pZZqcu25gHGIJAGVMRo4HdMIHaMA4G
+A1UdDwEB/wQEAwIHgDAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQw2CsgGv8H1DgP
+GXOCBa5btajxVTAfBgNVHSMEGDAWgBTIKwP3c9uOMpzh8jjKZOodsUL2wzAdBgNV
+HREEFjAUghJjcmVhdGUtY2VydHMtbGo1dzUwWwYIKgMEBQYHCAEET3siYXR0cnMi
+OnsiaGYuQWZmaWxpYXRpb24iOiIiLCJoZi5FbnJvbGxtZW50SUQiOiJvcmczYWRt
+aW4iLCJoZi5UeXBlIjoiYWRtaW4ifX0wCgYIKoZIzj0EAwIDRwAwRAIgCABVADKe
+UR446n1l47z3JjJyEpxT020bnxlhqkOxrBQCICYKyGb0Bg9aJ3HHEKdWmrIaDbXz
+nV/U0k51ApQfpdUr
+-----END CERTIFICATE-----
+[36m2024-07-04 07:29:25.213 UTC [msp] setupSigningIdentity -> DEBU 019[0m Signing identity expires at 2025-07-04 07:26:00 +0000 UTC
+[36m2024-07-04 07:29:25.214 UTC [msp] GetDefaultSigningIdentity -> DEBU 01a[0m Obtaining default signing identity
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 01b[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 01c[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 01d[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org3:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 01e[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 01f[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 020[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:25.215 UTC [grpc] InfoDepth -> DEBU 021[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000338fd0, {CONNECTING <nil>}
+[36m2024-07-04 07:29:25.216 UTC [grpc] InfoDepth -> DEBU 022[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:25.216 UTC [grpc] InfoDepth -> DEBU 023[0m [core]Subchannel picks a new address "peer0-org3:7051" to connect
+[36m2024-07-04 07:29:25.219 UTC [comm.tls] ClientHandshake -> DEBU 024[0m Client TLS handshake completed in 1.292344ms remoteaddress=10.105.93.165:7051
+[36m2024-07-04 07:29:25.219 UTC [grpc] InfoDepth -> DEBU 025[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:25.220 UTC [grpc] InfoDepth -> DEBU 026[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc000338fd0, {READY <nil>}
+[36m2024-07-04 07:29:25.220 UTC [grpc] InfoDepth -> DEBU 027[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 028[0m [core]parsed scheme: ""
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 029[0m [core]scheme "" not registered, fallback to default scheme
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 02a[0m [core]ccResolverWrapper: sending update to cc: {[{peer0-org3:7051  <nil> 0 <nil>}] <nil> <nil>}
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 02b[0m [core]ClientConn switching balancer to "pick_first"
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 02c[0m [core]Channel switches to new LB policy "pick_first"
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 02d[0m [core]Subchannel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 02e[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00027c9d0, {CONNECTING <nil>}
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 02f[0m [core]Channel Connectivity change to CONNECTING
+[36m2024-07-04 07:29:25.221 UTC [grpc] InfoDepth -> DEBU 030[0m [core]Subchannel picks a new address "peer0-org3:7051" to connect
+[36m2024-07-04 07:29:25.300 UTC [comm.tls] ClientHandshake -> DEBU 031[0m Client TLS handshake completed in 2.906611ms remoteaddress=10.105.93.165:7051
+[36m2024-07-04 07:29:25.302 UTC [grpc] InfoDepth -> DEBU 032[0m [core]Subchannel Connectivity change to READY
+[36m2024-07-04 07:29:25.302 UTC [grpc] InfoDepth -> DEBU 033[0m [core]pickfirstBalancer: UpdateSubConnState: 0xc00027c9d0, {READY <nil>}
+[36m2024-07-04 07:29:25.302 UTC [grpc] InfoDepth -> DEBU 034[0m [core]Channel Connectivity change to READY
+[36m2024-07-04 07:29:25.306 UTC [msp.identity] Sign -> DEBU 035[0m Sign: plaintext: 0AE5080A6208031A0C08D59E99B40610...8C8251300AD00100472913F900280000 
+[36m2024-07-04 07:29:25.306 UTC [msp.identity] Sign -> DEBU 036[0m Sign: digest: F4032437DCD061E719825739316D67BAD864D986788625F05B2D7CB764D4EE28 
+Error: chaincode install failed with status: 500 - failed to invoke backing implementation of 'InstallChaincode': could not build chaincode: docker build failed: docker image inspection failed: Get "http://unix.sock/images/dev-peer0-org3-basic-0e4204b7b5d2915ed26f336e4c90417b1ea3cdf1aa9c86845960125491c04367-0b74e81f55133ded52b1ceac5d6550f12daea9f2ebb6cec0e3dfacd24fab3460/json": dial unix /var/run/docker.sock: connect: no such file or directory
+command terminated with exit code 1
+[1;30mnull[0m
+[1;30mnull[0m
+[1;30mnull[0m
